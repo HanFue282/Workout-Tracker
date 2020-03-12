@@ -1,4 +1,3 @@
-const Workout = require("../models/Workout");
 const db = require("../models");
 
 module.exports = function(app) {
@@ -22,15 +21,25 @@ app.post("/api/workouts", function(req, res) {
     });
 });
 
-app.put("/api/workouts/:id", ({ body }, res) => {
+app.put("/api/workouts/:id", ({ params }, res) => {
     db.Workout.findOneAndUpdate(
-        {}, { $push: { exercises: body }}, { new: true }
+        {}, { $push: { exercises: params }}, { new: true }
     )
     .then(data => {
         res.json(data);
     })
     .catch(err => {
         res.json(err)
+    });
+});
+
+app.get("/api/workouts/range", function(req, res) {
+    db.Workout.find({})
+    .then(data => {
+        res.json(data);
+    })
+    .catch(err => {
+        res.json(err);
     });
 });
 
