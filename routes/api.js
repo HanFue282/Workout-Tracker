@@ -1,7 +1,5 @@
+module.exports = function(app) {
 const db = require("../models");
-const express = require("express");
-
-const app = express();
 
 db.Workout.create({ name: "Workout Tracker App" })
     .then(dbWorkout => {
@@ -21,3 +19,4 @@ app.post("/exercise", (req, res) => {
     });
 });
 
+}
